@@ -3,7 +3,13 @@ function init() {
   const grid = document.querySelector('.grid')
   const squares = []
   let direction = null
+  const pointCounter = document.querySelector('.points')
+
+  let points = 0
+  
   let speed = 400
+  // eslint-disable-next-line no-unused-vars
+  const timerId = setInterval(movePlayer, speed)
 
   // game variables
   const width = 15
@@ -28,8 +34,8 @@ function init() {
     playerLocation.map(index => squares[index].classList.remove('player'))
   }
   
-  console.log(playerLocation[0])
-  console.log(squares)
+  // console.log(playerLocation[0])
+  // console.log(squares)
 
   function newFood() {
     const foodLocation = Math.floor(Math.random() * squares.length)
@@ -38,14 +44,22 @@ function init() {
   newFood()
   // console.log(squares)
   // console.log(squares[playerLocation])
+  function speedUp() {
+    speed = speed - 50
+  }
 
   function snakeEats() {
     if (squares[playerLocation[0]].classList.contains('food')) {
       squares[playerLocation[0]].classList.remove('food')
-      // grow
-      //new food
-      speed -= 10
+      playerLocation.push('4')
+      newFood()
+      console.log(speed)
+      speedUp()
+      console.log(speed)
+      points += 15
+      console.log(points)
     }
+    pointCounter.innerHTML = points
   }
   snakeEats()
 
@@ -102,7 +116,7 @@ function init() {
     snakeEats()
   }
   
-  const timerId = setInterval(movePlayer, speed)
+  
 
   function handleKeyDown(e) {
     switch (e.keyCode) {
