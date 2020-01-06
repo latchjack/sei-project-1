@@ -1,0 +1,38 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+div.grid {
+  width: 600px;
+  height: 600px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+div.grid-item {
+  width: 40px;
+  height: 40px;
+  border: 1px dashed black;
+}
+
+div.grid-item.player {
+  background-color: orangered;
+  background-size: contain;
+}
+
+div.grid-item.food {
+  background-color: rgb(31, 240, 3);
+  background-size: contain;
+}
