@@ -36,3 +36,35 @@ div.grid-item.food {
   background-color: rgb(31, 240, 3);
   background-size: contain;
 }
+
+div.header {
+  display: flex;
+  flex-direction: column;
+  margin: 20px;
+}
+.game-title {
+  text-transform: uppercase;
+  color: black;
+}
+
+.points {
+  margin: 20px;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+button {
+  padding: 10px;
+  background-color: orangered;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: black;
+  border-radius: 4px;
+}
+
+button:hover {
+  background-color: white;
+  border-color: black;
+  color: orangered;
+  border-radius: 4px;
+}
