@@ -6,17 +6,21 @@ function init() {
   let direction = null
   const pointCounter = document.querySelector('.points')
   const messageBox = document.querySelector('.message')
-
   let points = 0
-
   let speed = 400
+  
   // eslint-disable-next-line no-unused-vars
-  const timerId = setInterval(movePlayer, speed)
+  // const timerId = setInterval(movePlayer, speed)
+
+  function startGame(){
+    intervalId = setInterval(movePlayer, speed)
+    newFood()
+  }
 
   // game variables
   const width = 15
   // eslint-disable-next-line prefer-const
-  let snake = [3, 2, 1]
+  let snake = [2, 1, 0]
 
   Array(width * width).join('.').split('.').forEach(() => {
     // create 
@@ -36,23 +40,24 @@ function init() {
   }
 
   function newFood() {
-    const foodLocation = Math.floor(Math.random() * squares.length)
-    squares[foodLocation].classList.add('food')
-    // if (squares[foodLocation].classList.contains('player')) {
-    //   console.log('oops!')
-    //   foodLocation += Math.floor(Math.random() * squares.length)
-    // }
+    const availableSquares = squares.filter(square => {
+      return !square.classList.contains('player')
+    })
+    const foodLocation = Math.floor(Math.random() * availableSquares.length)
+    availableSquares[foodLocation].classList.add('food')
   }
   newFood()
 
   function speedUp() {
-    speed -= 50
+    // clearInterval(timerId)
+    speed = speed - 150
   }
 
+  // ! edit this for test - grow faster
   function snakeEats() {
     if (squares[snake[0]].classList.contains('food')) {
       squares[snake[0]].classList.remove('food')
-      snake.push('4', '4', '4', '4', '4', '4', '4', '4') // ! edit this for test - grow faster
+      snake.push('4') // ! edit this for test - grow faster
       newFood()
       console.log(speed)
       speedUp()
@@ -112,9 +117,7 @@ function init() {
   }
 
   function collisionCheck() {
-    // if square is already occupied
     if (snake.slice(1).includes(snake[0])) {
-      // game over
       console.log('hit')
       gameOver()
       messageBox.innerHTML = 'GAME OVER!'
@@ -123,7 +126,7 @@ function init() {
 
   function gameOver() {
     direction = undefined
-    removePlayer()
+    grid.innerHTML = `<div><p>YOU LOSE, YOUR SCORE WAS ${points}</p></div>`
   }
 
   function handleKeyDown(e) {
