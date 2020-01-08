@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  font-family: 'Press Start 2P', cursive;
 }
 
 html, body {
@@ -67,4 +68,12 @@ button:hover {
   border-color: black;
   color: orangered;
   border-radius: 4px;
+}
+
+body > div.grid > div > p {
+  text-transform: uppercase;
+  color: orangered;
+  font-size: 50px;
+  text-align: center;
+  margin-top: 210px;
 }

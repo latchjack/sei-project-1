@@ -2,20 +2,19 @@ function init() {
 
   //  dom variables
   const grid = document.querySelector('.grid')
-  const squares = []
+  let squares = []
   let direction = null
   const pointCounter = document.querySelector('.points')
   const messageBox = document.querySelector('.message')
   const button = document.querySelector('.start')
   let points = 0
   let speed = 400
-  
+
   // eslint-disable-next-line no-unused-vars
   const timerId = setInterval(movePlayer, speed)
 
   // game variables
   const width = 15
-  // eslint-disable-next-line prefer-const
   let snake = [2, 1, 0]
 
   Array(width * width).join('.').split('.').forEach(() => {
@@ -27,6 +26,8 @@ function init() {
   })
 
   function clearPage() {
+    snake = [2, 1, 0]
+    squares = []
     grid.innerHTML = ''
   }
 
@@ -43,6 +44,7 @@ function init() {
     clearPage()
     makeGrid()
     addPlayer()
+    newFood()
   }
 
   function addPlayer() {
@@ -84,7 +86,7 @@ function init() {
   snakeEats()
 
   function movePlayer() {
-    // console.log(squares[snake[0]])
+    //console.log(snake[0])
     if (direction === 'right') {
       removePlayer()
       snake.pop()
@@ -93,8 +95,6 @@ function init() {
       }
       snake.unshift(snake[0] + 1)
       addPlayer()
-      // console.log(snake)
-
     }
     if (direction === 'left') {
       removePlayer()
@@ -141,7 +141,7 @@ function init() {
   function gameOver() {
     clearInterval(timerId)
     direction = undefined
-    grid.innerHTML = `<div><p>YOU LOSE, YOUR SCORE WAS ${points}</p></div>`
+    grid.innerHTML = `<div><p>YOU LOSE! YOUR SCORE WAS ${points} NOMS</p></div>`
   }
 
   function handleKeyDown(e) {
