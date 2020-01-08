@@ -5,17 +5,18 @@ function init() {
   let squares = []
   let direction = null
   const pointCounter = document.querySelector('.points')
-  const messageBox = document.querySelector('.message')
   const button = document.querySelector('.start')
   let points = 0
   let speed = 400
 
   // eslint-disable-next-line no-unused-vars
-  const timerId = setInterval(movePlayer, speed)
+  // eslint-disable-next-line prefer-const
+  let timerId = setInterval(movePlayer, speed)
 
   // game variables
   const width = 15
   let snake = [2, 1, 0]
+  
 
   Array(width * width).join('.').split('.').forEach(() => {
     // create 
@@ -25,10 +26,16 @@ function init() {
     grid.appendChild(square)
   })
 
+  // squares[snake[0]].classList.add('face')
+
   function clearPage() {
     snake = [2, 1, 0]
     squares = []
     grid.innerHTML = ''
+  }
+
+  function wipePoints() {
+    points = 0
   }
 
   function makeGrid() {
@@ -43,8 +50,10 @@ function init() {
   function rebuildGame() {
     clearPage()
     makeGrid()
+    wipePoints()
     addPlayer()
     newFood()
+    speedUp()
   }
 
   function addPlayer() {
@@ -66,8 +75,14 @@ function init() {
   newFood()
 
   function speedUp() {
-    // clearInterval(timerId)
-    speed = speed - 150
+    clearInterval(timerId)
+    speed = speed - 20
+    if (speed < 40) {
+      speed = 40
+      console.log('got too quick, adj to 40')
+    }
+    // eslint-disable-next-line prefer-const
+    timerId = setInterval(movePlayer, speed)
   }
 
   function snakeEats() {
@@ -75,11 +90,11 @@ function init() {
       squares[snake[0]].classList.remove('food')
       snake.push('4') // ! edit this for test - grow faster
       newFood()
-      console.log(speed)
+      console.log(`old speed was ${speed}`)
       speedUp()
-      console.log(speed)
+      console.log(`speed is now ${speed}`)
       points += 15
-      console.log(points)
+      console.log(`you now have ${points} noms`)
     }
     pointCounter.innerHTML = points
   }
@@ -134,7 +149,6 @@ function init() {
     if (snake.slice(1).includes(snake[0])) {
       //console.log('hit')
       gameOver()
-      messageBox.innerHTML = 'GAME OVER!'
     }
   }
 
@@ -142,13 +156,14 @@ function init() {
     clearInterval(timerId)
     direction = undefined
     grid.innerHTML = `<div><p>YOU LOSE! YOUR SCORE WAS ${points} NOMS</p></div>`
+    pointCounter.innerHTML = ''
   }
 
   function handleKeyDown(e) {
     switch (e.keyCode) {
       case 39: if (direction !== 'left') direction = 'right'
         movePlayer()
-        console.log(direction)
+        // console.log(direction)
         // if (snake % width < width - 1) {
         //   console.log(squares[snake])
         //   snake++
@@ -156,21 +171,21 @@ function init() {
         break
       case 37: if (direction !== 'right') direction = 'left'
         movePlayer()
-        console.log(direction)
+        // console.log(direction)
         // if (snake % width > 0) {
         //   snake--
         // }
         break
       case 40: if (direction !== 'up') direction = 'down'
         movePlayer()
-        console.log(direction)
+        // console.log(direction)
         // if (snake + width < width * width) {
         //   snake += width 
         // }
         break
       case 38: if (direction !== 'down') direction = 'up'
         movePlayer()
-        console.log(direction)
+        // console.log(direction)
         // if (snake - width >= 0) {
         //   snake -= width
         // }
