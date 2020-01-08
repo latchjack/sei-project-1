@@ -6,16 +6,12 @@ function init() {
   let direction = null
   const pointCounter = document.querySelector('.points')
   const messageBox = document.querySelector('.message')
+  const button = document.querySelector('.start')
   let points = 0
   let speed = 400
   
   // eslint-disable-next-line no-unused-vars
-  // const timerId = setInterval(movePlayer, speed)
-
-  function startGame(){
-    intervalId = setInterval(movePlayer, speed)
-    newFood()
-  }
+  const timerId = setInterval(movePlayer, speed)
 
   // game variables
   const width = 15
@@ -29,6 +25,25 @@ function init() {
     squares.push(square)
     grid.appendChild(square)
   })
+
+  function clearPage() {
+    grid.innerHTML = ''
+  }
+
+  function makeGrid() {
+    Array(width * width).join('.').split('.').forEach(() => {
+      const square = document.createElement('div')
+      square.classList.add('grid-item')
+      squares.push(square)
+      grid.appendChild(square)
+    })
+  }
+
+  function rebuildGame() {
+    clearPage()
+    makeGrid()
+    addPlayer()
+  }
 
   function addPlayer() {
     snake.map(index => squares[index].classList.add('player'))
@@ -53,7 +68,6 @@ function init() {
     speed = speed - 150
   }
 
-  // ! edit this for test - grow faster
   function snakeEats() {
     if (squares[snake[0]].classList.contains('food')) {
       squares[snake[0]].classList.remove('food')
@@ -118,13 +132,14 @@ function init() {
 
   function collisionCheck() {
     if (snake.slice(1).includes(snake[0])) {
-      console.log('hit')
+      //console.log('hit')
       gameOver()
       messageBox.innerHTML = 'GAME OVER!'
     }
   }
 
   function gameOver() {
+    clearInterval(timerId)
     direction = undefined
     grid.innerHTML = `<div><p>YOU LOSE, YOUR SCORE WAS ${points}</p></div>`
   }
@@ -166,7 +181,7 @@ function init() {
 
     // console.log('current player index is' , snake)
   }
-
+  button.addEventListener('click', rebuildGame)
   window.addEventListener('keydown', handleKeyDown)
 }
 window.addEventListener('DOMContentLoaded', init)
