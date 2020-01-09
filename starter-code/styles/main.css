@@ -66,6 +66,14 @@ div.header {
   text-shadow: 1px 1px 2px grey, 0 0 1em white, 0 0 0.2em white;
 }
 
+body > div.header > div.top-score {
+  margin: 20px;
+  font-size: 30px;
+  font-weight: 600;
+  text-align: center;
+  text-shadow: 1px 1px 2px grey, 0 0 1em white, 0 0 0.2em white;
+}
+
 button {
   padding: 10px;
   background-color: orangered;
@@ -90,10 +98,4 @@ body > div.grid > div > p {
   text-align: center;
   margin-top: 210px;
   padding: 5px;
-}
-
-.face {
-  background-image: url('../assets/eyes.jpg');
-  background-color: orangered;
-  rotate: -90deg;
 }

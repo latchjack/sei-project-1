@@ -8,10 +8,10 @@ function init() {
   const button = document.querySelector('.start')
   let points = 0
   let speed = 400
-  //const topScore = document.querySelector('.top-score')
-
 
   //? START OF TOP SCORE SECTION
+  const topScore = document.querySelector('.top-score')
+
 
   let storedHiScore = localStorage.getItem('storedHiScore') ? JSON.parse(localStorage.getItem('storedHiScore')) : null
   const data = JSON.parse(localStorage.getItem('storedHiScore'))
@@ -21,7 +21,7 @@ function init() {
     const hiScore = document.createElement('div')
     hiScore.classList.add('hi-score')
     hiScore.innerHTML = storedHiScore
-    eachScore.appendChild(hiScore)
+    topScore.appendChild(hiScore)
   }
 
   // Function to store your score into local storage - it's up to you at what point in the game to call this function
@@ -199,6 +199,7 @@ function init() {
     direction = undefined
     grid.innerHTML = `<div><p>YOU LOSE! YOUR SCORE WAS ${points} NOMS</p></div>`
     pointCounter.innerHTML = ''
+    storeScores()
   }
 
   function handleKeyDown(e) {
