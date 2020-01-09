@@ -47,13 +47,21 @@ function init() {
     })
   }
 
+  // ! need to fix speed when new game starts. game maintains speed of last played game when btn pressed
+  function newGameSpeed() {
+    clearInterval(timerId)
+    speed = 400
+    timerId = setInterval(movePlayer, speed)
+  }
+
   function rebuildGame() {
     clearPage()
     makeGrid()
     wipePoints()
     addPlayer()
     newFood()
-    speedUp()
+    //speedUp()
+    newGameSpeed()
   }
 
   function addPlayer() {
@@ -76,7 +84,7 @@ function init() {
 
   function speedUp() {
     clearInterval(timerId)
-    speed = speed - 20
+    speed = speed - 15
     if (speed < 40) {
       speed = 40
       console.log('got too quick, adj to 40')
