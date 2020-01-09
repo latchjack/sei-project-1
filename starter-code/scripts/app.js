@@ -8,6 +8,43 @@ function init() {
   const button = document.querySelector('.start')
   let points = 0
   let speed = 400
+  //const topScore = document.querySelector('.top-score')
+
+
+  //? START OF TOP SCORE SECTION
+
+  let storedHiScore = localStorage.getItem('storedHiScore') ? JSON.parse(localStorage.getItem('storedHiScore')) : null
+  const data = JSON.parse(localStorage.getItem('storedHiScore'))
+
+  // Function to set up your page to display your high score  
+  function hiScoreCreate() {
+    const hiScore = document.createElement('div')
+    hiScore.classList.add('hi-score')
+    hiScore.innerHTML = storedHiScore
+    eachScore.appendChild(hiScore)
+  }
+
+  // Function to store your score into local storage - it's up to you at what point in the game to call this function
+  function storeScores() {
+    if (points > storedHiScore) { // if the current points value is higher than the value stored in local storage
+      storedHiScore = points // assign storedHiScore to equal the current value of points
+      localStorage.setItem('storedHiScore', JSON.stringify(storedHiScore)) // set storedHiScore into local storage
+      // this is a key value pair - you are setting the key above and then giving it the value of your latest 
+      // high score
+      hiScoreCreate() // this will enable you to display the score immediately if needed
+    }
+  }
+
+  function displayHiScore() {
+    data ? hiScoreCreate(data) : null
+  }
+  displayHiScore()
+
+  // If you ever want to reset the data - you can do this in the console - localStorage.clear()
+  // or you can create a function and invoke localStorage.clear() within it - if you want the user to have 
+  // control over what is stored.
+
+  //? END OF TOP SCORE SECTION
 
   // eslint-disable-next-line no-unused-vars
   // eslint-disable-next-line prefer-const
@@ -25,8 +62,6 @@ function init() {
     squares.push(square)
     grid.appendChild(square)
   })
-
-  // squares[snake[0]].classList.add('face')
 
   function clearPage() {
     snake = [2, 1, 0]
