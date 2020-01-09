@@ -60,7 +60,6 @@ function init() {
     wipePoints()
     addPlayer()
     newFood()
-    //speedUp()
     newGameSpeed()
   }
 
