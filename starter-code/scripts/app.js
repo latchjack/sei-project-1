@@ -19,9 +19,16 @@ function init() {
   // Function to set up your page to display your high score  
   function hiScoreCreate() {
     const hiScore = document.createElement('div')
-    hiScore.classList.add('hi-score')
-    hiScore.innerHTML = storedHiScore
-    topScore.appendChild(hiScore)
+    if (hiScore) {
+      hiScore.classList.add('hi-score')
+      hiScore.innerHTML = ''
+      hiScore.innerHTML = storedHiScore
+      topScore.appendChild(hiScore)
+    }
+    // const hiScore = document.createElement('div')
+    // hiScore.classList.add('hi-score')
+    // hiScore.innerHTML = storedHiScore
+    // topScore.appendChild(hiScore)
   }
 
   // Function to store your score into local storage - it's up to you at what point in the game to call this function
