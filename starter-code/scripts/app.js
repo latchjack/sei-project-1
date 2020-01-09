@@ -12,19 +12,11 @@ function init() {
   //? START OF TOP SCORE SECTION
   const topScore = document.querySelector('.top-score')
 
-
   let storedHiScore = localStorage.getItem('storedHiScore') ? JSON.parse(localStorage.getItem('storedHiScore')) : null
   const data = JSON.parse(localStorage.getItem('storedHiScore'))
 
   // Function to set up your page to display your high score  
   function hiScoreCreate() {
-    // const hiScore = document.createElement('div')
-    // if (hiScore) {
-    //   hiScore.classList.add('hi-score')
-    //   hiScore.innerHTML = ''
-    //   hiScore.innerHTML = storedHiScore
-    //   topScore.appendChild(hiScore)
-    // } // ! if the hiscore bugs continues revert back to below code
     const hiScore = document.createElement('div')
     hiScore.classList.add('hi-score')
     hiScore.innerHTML = storedHiScore
@@ -51,7 +43,6 @@ function init() {
   // If you ever want to reset the data - you can do this in the console - localStorage.clear()
   // or you can create a function and invoke localStorage.clear() within it - if you want the user to have 
   // control over what is stored.
-
   //? END OF TOP SCORE SECTION
 
   // eslint-disable-next-line no-unused-vars
@@ -90,7 +81,6 @@ function init() {
     })
   }
 
-  // ! need to fix speed when new game starts. game maintains speed of last played game when btn pressed
   function newGameSpeed() {
     clearInterval(timerId)
     speed = 400
@@ -115,14 +105,52 @@ function init() {
     snake.map(index => squares[index].classList.remove('player'))
   }
 
+
+
+
   function newFood() {
+    const bugs = ['bug0', 'bug1', 'bug2', 'bug3']
+    const randomBug = bugs[Math.floor(Math.random() * Math.floor(4))]
     const availableSquares = squares.filter(square => {
       return !square.classList.contains('player')
     })
     const foodLocation = Math.floor(Math.random() * availableSquares.length)
-    availableSquares[foodLocation].classList.add('food')
+    const squareFood = availableSquares[foodLocation]
+    console.log(squareFood)
+    squareFood.classList.add('food')
+    squareFood.style.backgroundImage = `url('./assets/${randomBug}.png')`
+    squareFood.setAttribute('data-id', randomBug)
+    
   }
   newFood()
+
+
+  // ! OLD NEWFOOD AND SNAKEEATS FUNCTION. REVERTS IT BACK TO 1BUG MODE
+  // function newFood() {
+  //   const availableSquares = squares.filter(square => {
+  //     return !square.classList.contains('player')
+  //   })
+  //   const foodLocation = Math.floor(Math.random() * availableSquares.length)
+  //   availableSquares[foodLocation].classList.add('food')
+  // }
+  // newFood()
+
+  // function snakeEats() {
+  //   if (squares[snake[0]].classList.contains('food')) {
+  //     squares[snake[0]].classList.remove('food')
+  //     snake.push('4')
+  //     newFood()
+  //     console.log(`old speed was ${speed}`)
+  //     speedUp()
+  //     console.log(`speed is now ${speed}`)
+  //     points += 15
+  //     console.log(`you now have ${points} noms`)
+  //   }
+  //   pointCounter.innerHTML = points
+  // }
+  // snakeEats()
+  // ! END OF OLD NEWFOOD AND SNAKEEATS FUNCTION. REVERTS IT BACK TO 1BUG MODE
+
 
   function speedUp() {
     clearInterval(timerId)
@@ -143,7 +171,27 @@ function init() {
       console.log(`old speed was ${speed}`)
       speedUp()
       console.log(`speed is now ${speed}`)
-      points += 15
+      if (squares[snake[0]].getAttribute('data-id') === 'bug0') {
+        points += 15
+        squares[snake[0]].classList.remove('food')
+        squares[snake[0]].style.backgroundImage = ''
+        squares[snake[0]].setAttribute('data-id', '')
+      } else if (squares[snake[0]].getAttribute('data-id') === 'bug1') {
+        points += 20
+        squares[snake[0]].classList.remove('food')
+        squares[snake[0]].style.backgroundImage = ''
+        squares[snake[0]].setAttribute('data-id', '')
+      } else if (squares[snake[0]].getAttribute('data-id') === 'bug2') {
+        points += 25
+        squares[snake[0]].classList.remove('food')
+        squares[snake[0]].style.backgroundImage = ''
+        squares[snake[0]].setAttribute('data-id', '')
+      } else if (squares[snake[0]].getAttribute('data-id') === 'bug3') {
+        points += 30
+        squares[snake[0]].classList.remove('food')
+        squares[snake[0]].style.backgroundImage = ''
+        squares[snake[0]].setAttribute('data-id', '')
+      }
       console.log(`you now have ${points} noms`)
     }
     pointCounter.innerHTML = points
