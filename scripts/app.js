@@ -124,7 +124,6 @@ function init() {
     squareFood.classList.add('food')
     squareFood.style.backgroundImage = `url('./assets/${randomBug}.png')`
     squareFood.setAttribute('data-id', randomBug)
-    
   }
   newFood()
 
