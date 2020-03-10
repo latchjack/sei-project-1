@@ -224,8 +224,9 @@ The improvements I would like to make on this game would be the following...
 1. Fixing the disappearing segment when the snake goes through the wall
 2. Making the game mobile responsive so it adjusts to mobile displays and listens for touchscreen presses.
 3. Applying a countdown timer for how long a bug is displayed on the screen to make it more exhilarating. After thinking about it, I realised that some players would be able to achieve a higher score than others. This is because the bugs are randomly generated meaning some lucky players may have more bugs spawn that are worth more than ones that spawn for other players. By making them harder to catch I thought it might even out the chances for everyone who played.
+4. Add some more bugs. Possibly even some that are rarer and only appear every so often.
 
 #### Author
 Latch Jack - You can contact me via [Twitter](https://twitter.com/LatchCodes "My twitter profile") or via [email](mailto:latch.jack@gmail.com "my email").
 
-Thank you for reading/playing/visiting my repository! :)
+Thank you for reading / playing / visiting my repository! :)
