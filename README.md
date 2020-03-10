@@ -207,13 +207,13 @@ After the `movePlayer` function was invoked on a certain direction the code belo
 The issue I came across with this was that the snake moves as expected until it gets to the edge of the grid when it is meant to appear from the other side. The head of the snake comes out on the right line but as soon as it does the next segment of the body disappears whilst the snake passes through the wall. You can see a picture of the issue below
 
 First the snake approaches the edge of the grid. It should appear from the other side on the same line.
-![Image 1 of error](assets/readMeFiles/Error-1.png)
+![Image 1 of error](assets/ReadMeFiles/Error-1.png)
 
 As the snake's head passes through to the other side we can see that the next segment of the body disappears leaving an empty square.
-![Image 2 of error](assets/readMeFiles/Error-2.png)
+![Image 2 of error](assets/ReadMeFiles/Error-2.png)
 
-Continuation of image above
-![Image 3 of error](assets/readMeFiles/Error-3.png)
+Continuation of images above
+![Image 3 of error](assets/ReadMeFiles/Error-3.png)
 
 I did a lot of debugging but I wasn't able to figure out why this was happening. I came to the conclusion that it may be because I had to seperate functions that handled the movement of the snake.
 
