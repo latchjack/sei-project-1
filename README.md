@@ -1,5 +1,5 @@
 ![GA Logo](https://cloud.githubusercontent.com/assets/40461/8183776/469f976e-1432-11e5-8199-6ac91363302b.png)
-# Software Engineneering Immersive: Project 1
+# Software Engineering Immersive: Project 1
 This was my first project built whilst studying the Software Engineering Immersive course at General Assembly.
 
 This game was built in one week during Week 4 of the course.
@@ -73,5 +73,11 @@ The bugs are randomly generated so the player will never know which bug will app
   }
 ```
 When the `newFood` function is invoked, the first step is that it randomly chooses one of the 4 bugs from the `bugs` constant via the `Math.random` function in the `randomBug` constant.
-It then runs a filter function on the grid array which is named `squares` and returns all squares that do not contain the class of `player` (the snake's head or body) and places them into the new array `availableSquares`.
-This is done so that I can make sure the next bug that is generated doesn't appear in a square that is currently occupied.  
+
+It then runs a filter function on the grid array which is named `squares` and returns all squares that do not contain the class of `player` (the snake's head or body) and places them into the new array `availableSquares`. I then run another `Math.random` function on the available squares so I can randomly choose one of the empty squares so the game isn't predictable.
+This is done so that I can make sure the next bug that is generated doesn't appear in a square that is currently occupied.
+
+This isn't a big issue at the beginning of the game the snake can only occupy three squares, however later into the game it would cause many problems if the food were to spawn on a location already occupied by the player. So by having these two random function I am able to avoid any collision issues.
+
+## Challenges and Improvements
+
