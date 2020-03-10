@@ -24,14 +24,14 @@ function init() {
     topScore.removeChild(topScore.firstChild)
   }
 
-  // Function to store your score into local storage - it's up to you at what point in the game to call this function
+  // Function to store player's score into browser's local storage
   function storeScores() {
     if (points > storedHiScore) { // if the current points value is higher than the value stored in local storage
       storedHiScore = points // assign storedHiScore to equal the current value of points
       localStorage.setItem('storedHiScore', JSON.stringify(storedHiScore)) // set storedHiScore into local storage
       // this is a key value pair - you are setting the key above and then giving it the value of your latest 
       // high score
-      hiScoreCreate() // this will enable you to display the score immediately if needed
+      hiScoreCreate() // this enables the score to be displayed immediately
     }
   }
 
@@ -40,8 +40,8 @@ function init() {
   }
   displayHiScore()
 
-  // If you ever want to reset the data - you can do this in the console - localStorage.clear()
-  // or you can create a function and invoke localStorage.clear() within it - if you want the user to have 
+  // To reset the Highest score paste - localStorage.clear() - into the browser console
+  // or I can create a function and invoke localStorage.clear() within it - if I want the user to have 
   // control over what is stored.
   //? END OF TOP SCORE SECTION
 
@@ -51,9 +51,10 @@ function init() {
 
   // game variables
   const width = 15
+  // this is the array which displays as the snake on the grid
   let snake = [2, 1, 0]
   
-
+  // building the array grid
   Array(width * width).join('.').split('.').forEach(() => {
     // create 
     const square = document.createElement('div')
@@ -62,16 +63,19 @@ function init() {
     grid.appendChild(square)
   })
 
+  // this is to reset the snake back to its default size and resest the grid
   function clearPage() {
     snake = [2, 1, 0]
     squares = []
     grid.innerHTML = ''
   }
 
+  // clear the points and set it back to 0
   function wipePoints() {
     points = 0
   }
 
+  // this function will rebuild the grid after the game ends
   function makeGrid() {
     Array(width * width).join('.').split('.').forEach(() => {
       const square = document.createElement('div')
@@ -81,12 +85,14 @@ function init() {
     })
   }
 
+  // the speed handler function which makes sure the game is reset to its default speed
   function newGameSpeed() {
     clearInterval(timerId)
     speed = 400
     timerId = setInterval(movePlayer, speed)
   }
 
+  // this function will invoke all of the game building functions and rebuild it to its default state
   function rebuildGame() {
     clearPage()
     makeGrid()
@@ -105,9 +111,7 @@ function init() {
     snake.map(index => squares[index].classList.remove('player'))
   }
 
-
-
-
+  // i built this function to enable different bugs to spawn with variable points when eaten
   function newFood() {
     const bugs = ['bug0', 'bug1', 'bug2', 'bug3']
     const randomBug = bugs[Math.floor(Math.random() * Math.floor(4))]
@@ -123,7 +127,6 @@ function init() {
     
   }
   newFood()
-
 
   // ! OLD NEWFOOD AND SNAKEEATS FUNCTION. REVERTS IT BACK TO 1BUG MODE
   // function newFood() {
@@ -151,7 +154,8 @@ function init() {
   // snakeEats()
   // ! END OF OLD NEWFOOD AND SNAKEEATS FUNCTION. REVERTS IT BACK TO 1BUG MODE
 
-
+  // this function will adjust the speed when a bug is eaten, 
+  // it will also make sure the top speed is reverted back to 40 if the game gets too fast
   function speedUp() {
     clearInterval(timerId)
     speed = speed - 15
@@ -163,6 +167,8 @@ function init() {
     timerId = setInterval(movePlayer, speed)
   }
 
+  // the snakeEats function is the collision detection for when the snake touches the food
+  // it detects which bug was eaten and gives the right amount of points for each one
   function snakeEats() {
     if (squares[snake[0]].classList.contains('food')) {
       squares[snake[0]].classList.remove('food')
@@ -198,6 +204,8 @@ function init() {
   }
   snakeEats()
 
+  // this function reads the input from the handleKeyDown function and runs the correct math depending
+  // on which direction the user has pressed to calculate the direction
   function movePlayer() {
     //console.log(snake[0])
     if (direction === 'right') {
@@ -243,6 +251,8 @@ function init() {
     collisionCheck()
   }
 
+  // the collisionCheck function detects when the head of the snake touches another part
+  // of its body
   function collisionCheck() {
     if (snake.slice(1).includes(snake[0])) {
       //console.log('hit')
@@ -258,43 +268,31 @@ function init() {
     storeScores()
   }
 
+  // this function listens for the arrow key presses and set the value of the direction varialble
+  // which is later read by the movePlayer function
   function handleKeyDown(e) {
     switch (e.keyCode) {
       case 39: if (direction !== 'left') direction = 'right'
         movePlayer()
-        // console.log(direction)
-        // if (snake % width < width - 1) {
-        //   console.log(squares[snake])
-        //   snake++
-        // }
+
         break
       case 37: if (direction !== 'right') direction = 'left'
         movePlayer()
-        // console.log(direction)
-        // if (snake % width > 0) {
-        //   snake--
-        // }
+
         break
       case 40: if (direction !== 'up') direction = 'down'
         movePlayer()
-        // console.log(direction)
-        // if (snake + width < width * width) {
-        //   snake += width 
-        // }
+
         break
       case 38: if (direction !== 'down') direction = 'up'
         movePlayer()
-        // console.log(direction)
-        // if (snake - width >= 0) {
-        //   snake -= width
-        // }
+
         break
       default:
         console.log('player shouldnt move')
     }
-
-    // console.log('current player index is' , snake)
   }
+  // event listeners for the arrow keys and the button
   button.addEventListener('click', rebuildGame)
   window.addEventListener('keydown', handleKeyDown)
 }
