@@ -6,16 +6,25 @@ This game was built in one week during Week 4 of the course.
 
 # Snake 2
 
+## Brief
+- **Render a game in the browser**
+- **Design logic for winning & visually display which player won**
+- **Include separate HTML / CSS / JavaScript files**
+- Stick with **KISS (Keep It Simple Stupid)** and **DRY (Don't Repeat Yourself)** principles
+- Use **Javascript** for **DOM manipulation**
+- **Deploy your game online**, where the rest of the world can access it
+- Use **semantic markup** for HTML and CSS (adhere to best practices)
+
 ## Tech Stack
 This project was built using the following technologies.
 + HTML5
 + CSS3
-+ JavaScript
-+ GitHub
++ JavaScript (ES6)
++ Git & GitHub
 
 ## Release History
 
-+ 1.0 - This game will not be updated so as to stay true to the challenge of building it in one week. This also is to serve as a marker for how much I have improved since the date (10/01/20) this was submitted. Any improvements stated to be made to it will be done so in a follow up project.
++ 1.0 - This game will not be updated so as to stay true to the challenge of building it in one week. This also is to serve as a benchmark for how much I have improved since the date (10/01/20) this was submitted. Any improvements stated to be made to it will be done so in a follow up project.
 
 ## Deployment
 The game is deployed utilising GitHub Pages and it can be found (and played 😉) here via this link - [Snake 2](https://latchjack.github.io/sei-project-1/)
