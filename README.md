@@ -232,6 +232,21 @@ The improvements I would like to make on this game would be the following...
 4. Add some more bugs. Possibly even some that are rarer and only appear every so often.
 5. Combine the two functions that handle movement into one clean function.
 
+## Wins & Key Learnings
+### Wins
+I met my deadline and I was very happy with the game overall. I learnt a lot whilst creating this game.
+
+### Key Learnings
+The key knowledge I gained from completing this project was...
+
++ Writing functions.
++ *Scoping out* the code so a user cannot access/edit it.
++ Creating intervals and timeouts.
++ Event handling.
++ DOM manipulation.
++ DRY coding.
+
+
 #### Author
 Latch Jack - You can contact me via [Twitter](https://twitter.com/LatchCodes "My twitter profile") or via [email](mailto:latch.jack@gmail.com "my email").
 
